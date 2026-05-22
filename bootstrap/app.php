@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
             'permission' => \App\Http\Middleware\CheckPermission::class,
+            'password.reset' => \App\Http\Middleware\CheckPasswordReset::class,
+        ]);
+
+        $middleware->appendToGroup('web', [
+            \App\Http\Middleware\CheckPasswordReset::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
