@@ -29,6 +29,42 @@
                     </div>
                 </div>
 
+                {{-- Leave Summary --}}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Leave Summary</h3>
+                    <p class="text-gray-600 mb-4">Export all leave requests and balances</p>
+                    <a href="{{ route('reports.leave.excel') }}" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-center block">
+                        📊 Export XLSX
+                    </a>
+                </div>
+
+                {{-- Benefits Summary --}}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Benefits Summary</h3>
+                    <p class="text-gray-600 mb-4">Export employee benefits data</p>
+                    <a href="{{ route('reports.benefits.excel') }}" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-center block">
+                        📊 Export XLSX
+                    </a>
+                </div>
+
+                {{-- Document Expiry --}}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Document Expiry</h3>
+                    <p class="text-gray-600 mb-4">Track expiring employee documents</p>
+                    <a href="{{ route('reports.expiry.excel') }}" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-center block">
+                        📊 Export XLSX
+                    </a>
+                </div>
+
+                {{-- Headcount --}}
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Headcount Report</h3>
+                    <p class="text-gray-600 mb-4">Employees by department</p>
+                    <a href="{{ route('reports.headcount.excel') }}" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-center block">
+                        📊 Export XLSX
+                    </a>
+                </div>
+
                 {{-- Audit Logs --}}
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Audit Logs</h3>

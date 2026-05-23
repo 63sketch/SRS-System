@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::get('reports/leave/excel', [\App\Http\Controllers\ReportController::class, 'exportLeaveExcel'])->name('reports.leave.excel');
         Route::get('reports/benefits/excel', [\App\Http\Controllers\ReportController::class, 'exportBenefitsExcel'])->name('reports.benefits.excel');
         Route::get('reports/expiry/excel', [\App\Http\Controllers\ReportController::class, 'exportDocumentExpiryExcel'])->name('reports.expiry.excel');
+        Route::get('reports/headcount/excel', [\App\Http\Controllers\ReportController::class, 'exportHeadcountExcel'])->name('reports.headcount.excel');
     });
 });
 

@@ -16,15 +16,17 @@ class EmployeesExport implements FromCollection, WithHeadings, WithStyles
             ->get()
             ->map(function ($employee) {
                 return [
-                    'employee_code' => $employee->employee_code,
+                    'employee_id' => $employee->employee_code,
                     'first_name' => $employee->first_name,
                     'last_name' => $employee->last_name,
                     'email' => $employee->email,
+                    'phone' => is_array($employee->phones) ? implode(', ', $employee->phones) : $employee->phones,
                     'department' => $employee->department?->name ?? 'N/A',
                     'position' => $employee->position?->title ?? 'N/A',
-                    'supervisor' => $employee->supervisor?->first_name . ' ' . $employee->supervisor?->last_name ?? 'N/A',
-                    'status' => ucfirst($employee->status),
-                    'hire_date' => $employee->hire_date?->format('d-m-Y'),
+                    'manager' => $employee->supervisor?->first_name . ' ' . $employee->supervisor?->last_name ?? 'N/A',
+                    'employment_status' => ucfirst($employee->status),
+                    'join_date' => $employee->hire_date?->format('d-m-Y'),
+                    'created_at' => $employee->created_at?->format('d-m-Y H:i'),
                 ];
             });
     }
@@ -32,15 +34,17 @@ class EmployeesExport implements FromCollection, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
-            'Employee Code',
+            'Employee ID',
             'First Name',
             'Last Name',
             'Email',
+            'Phone',
             'Department',
             'Position',
-            'Supervisor',
+            'Manager',
             'Status',
-            'Hire Date',
+            'Join Date',
+            'Created Date',
         ];
     }
 
