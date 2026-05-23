@@ -22,6 +22,8 @@ class User extends Authenticatable
         'employee_id',
         'status',
         'last_login_at',
+        'must_reset_password',
+        'password_last_changed_at',
     ];
 
     protected $hidden = [
@@ -40,6 +42,8 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'last_login_at' => 'datetime',
+            'must_reset_password' => 'boolean',
+            'password_last_changed_at' => 'datetime',
         ];
     }
 

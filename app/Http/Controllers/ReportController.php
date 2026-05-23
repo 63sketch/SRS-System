@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\EmployeesExport;
-use App\Exports\LeaveExport;
-use App\Exports\BenefitExport;
-use App\Exports\DocumentExpiryExport;
+use App\Models\AuditLog;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Employee;
@@ -20,28 +18,29 @@ class ReportController extends Controller
 
     public function exportEmployeesExcel()
     {
+        $this->logExport('Employee List', 'Excel');
         return Excel::download(new EmployeesExport, 'employees.xlsx');
     }
 
     public function exportEmployeesPdf()
     {
-        $employees = Employee::all();
+        $employees = Employee::with(['department', 'position'])->get();
+        $this->logExport('Employee List', 'PDF');
         $pdf = Pdf::loadView('reports.pdf.employees', compact('employees'));
         return $pdf->download('employees.pdf');
     }
 
-    public function exportLeaveExcel()
+    protected function logExport($reportName, $format)
     {
-        return Excel::download(new LeaveExport, 'leave_summary.xlsx');
-    }
-
-    public function exportBenefitsExcel()
-    {
-        return Excel::download(new BenefitExport, 'benefits_summary.xlsx');
-    }
-
-    public function exportDocumentExpiryExcel()
-    {
-        return Excel::download(new DocumentExpiryExport, 'document_expiry.xlsx');
+        AuditLog::create([
+            'user_id' => auth()->id(),
+            'action' => 'exported',
+            'action_type' => 'export',
+            'entity_type' => 'Report',
+            'entity_id' => 0,
+            'after_json' => json_encode(['report' => $reportName, 'format' => $format]),
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
     }
 }

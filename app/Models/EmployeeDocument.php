@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\LogsActivity;
 
 class EmployeeDocument extends Model
+    use LogsActivity;
 {
     use LogsActivity;
     protected $fillable = [
