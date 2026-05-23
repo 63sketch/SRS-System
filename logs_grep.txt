@@ -1,0 +1,3 @@
+app/Models/EmployeeDocument.php:    use LogsActivity;
+app/Models/Role.php:    use LogsActivity;
+app/Models/Benefit.php:    use LogsActivity;

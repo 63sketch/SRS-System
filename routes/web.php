@@ -32,21 +32,14 @@ Route::middleware('auth')->group(function () {
         Route::get('settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');
         Route::post('settings', [\App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update');
 
-        // Audit Logs
-        Route::get('audit-logs', [\App\Http\Controllers\AuditLogController::class, 'index'])->name('audit-logs.index');
-
         // Reports
         Route::get('reports', [\App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
         Route::get('reports/employees/excel', [\App\Http\Controllers\ReportController::class, 'exportEmployeesExcel'])->name('reports.employees.excel');
         Route::get('reports/employees/pdf', [\App\Http\Controllers\ReportController::class, 'exportEmployeesPdf'])->name('reports.employees.pdf');
+        Route::get('reports/leave/excel', [\App\Http\Controllers\ReportController::class, 'exportLeaveExcel'])->name('reports.leave.excel');
+        Route::get('reports/benefits/excel', [\App\Http\Controllers\ReportController::class, 'exportBenefitsExcel'])->name('reports.benefits.excel');
+        Route::get('reports/expiry/excel', [\App\Http\Controllers\ReportController::class, 'exportDocumentExpiryExcel'])->name('reports.expiry.excel');
     });
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'show'])
-        ->name('password.force-reset');
-    Route::post('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'store'])
-        ->name('password.force-reset.update');
 });
 
 require __DIR__.'/auth.php';

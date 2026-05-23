@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LogsActivity;
 
 class Benefit extends Model
 {
+    use LogsActivity;
     protected $fillable = ['name', 'category', 'description', 'eligibility_rule', 'default_value'];
 
     protected $casts = [

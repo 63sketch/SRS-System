@@ -17,6 +17,27 @@
                                 <a href="{{ route('reports.employees.pdf') }}" class="px-4 py-2 bg-red-600 text-white rounded">Export PDF</a>
                             </div>
                         </div>
+
+                        <div class="p-4 border rounded shadow">
+                            <h3 class="font-bold text-lg mb-2">Leave Summary</h3>
+                            <div class="flex gap-2">
+                                <a href="{{ route('reports.leave.excel') }}" class="px-4 py-2 bg-green-600 text-white rounded">Export XLSX</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border rounded shadow">
+                            <h3 class="font-bold text-lg mb-2">Benefits Summary</h3>
+                            <div class="flex gap-2">
+                                <a href="{{ route('reports.benefits.excel') }}" class="px-4 py-2 bg-green-600 text-white rounded">Export XLSX</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border rounded shadow">
+                            <h3 class="font-bold text-lg mb-2">Document Expiry</h3>
+                            <div class="flex gap-2">
+                                <a href="{{ route('reports.expiry.excel') }}" class="px-4 py-2 bg-green-600 text-white rounded">Export XLSX</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
