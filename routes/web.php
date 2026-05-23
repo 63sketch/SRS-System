@@ -48,10 +48,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'show'])
+    Route::get('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'showResetForm'])
         ->name('password.force-reset');
-    Route::post('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'store'])
-        ->name('password.force-reset.update');
+    Route::post('force-password-reset', [\App\Http\Controllers\Auth\PasswordResetController::class, 'forceReset'])
+        ->name('password.force-reset.store');
 });
 
 require __DIR__.'/auth.php';
