@@ -27,6 +27,49 @@ Route::middleware('auth')->group(function () {
     Route::resource('leave', LeaveRequestController::class);
     Route::post('leave/{leaveRequest}/approve', [LeaveRequestController::class, 'approve'])->name('leave.approve');
 
+    // Timesheet Routes
+    Route::resource('timesheets', TimesheetController::class);
+    Route::get('approvals/timesheets', [\App\Http\Controllers\TimesheetController::class, 'approvals'])->name('timesheets.approvals');
+    Route::post('timesheets/{timesheet}/approve', [\App\Http\Controllers\TimesheetController::class, 'approve'])->name('timesheets.approve');
+
+    // ESS Routes
+    Route::prefix('ess')->name('ess.')->group(function () {
+        Route::get('dashboard', [\App\Http\Controllers\ESSController::class, 'dashboard'])->name('dashboard');
+        Route::get('my-documents', [\App\Http\Controllers\ESSController::class, 'myDocuments'])->name('documents');
+        Route::get('my-payslips', [\App\Http\Controllers\ESSController::class, 'myPayslips'])->name('payslips');
+        Route::post('request-update', [\App\Http\Controllers\ESSController::class, 'requestInfoUpdate'])->name('request-update');
+    });
+
+    // Payroll Routes
+    Route::middleware('role:HR Admin')->group(function () {
+        Route::resource('payroll', PayrollRunController::class);
+        Route::post('payroll/{payrollRun}/approve', [PayrollRunController::class, 'approve'])->name('payroll.approve');
+    });
+
+    // Performance Routes
+    Route::get('performance/goals', [PerformanceController::class, 'goals'])->name('performance.goals');
+    Route::post('performance/goals', [PerformanceController::class, 'storeGoal'])->name('performance.goals.store');
+    Route::resource('performance/cycles', PerformanceController::class);
+
+    // Recruitment Routes
+    Route::get('recruitment', [RecruitmentController::class, 'index'])->name('recruitment.index');
+    Route::get('recruitment/{job}/applicants', [RecruitmentController::class, 'applicants'])->name('recruitment.applicants');
+    Route::post('recruitment', [RecruitmentController::class, 'storeJob'])->name('recruitment.store');
+
+    // Training Routes
+    Route::get('training', [TrainingController::class, 'index'])->name('training.index');
+    Route::get('my-training', [TrainingController::class, 'myTrainings'])->name('training.my');
+
+    // Offboarding Routes
+    Route::resource('offboarding', OffboardingController::class);
+
+    // Notifications
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+
+    // Analytics
+    Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
     // Settings Routes
     Route::middleware('role:Super Admin')->group(function () {
         Route::get('settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');

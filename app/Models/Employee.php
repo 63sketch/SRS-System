@@ -54,4 +54,24 @@ class Employee extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function directReports()
+    {
+        return $this->hasMany(Employee::class, 'supervisor_id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(EmployeeDocument::class);
+    }
+
+    public function timesheets()
+    {
+        return $this->hasMany(Timesheet::class);
+    }
+
+    public function benefits()
+    {
+        return $this->hasMany(EmployeeBenefit::class);
+    }
 }
